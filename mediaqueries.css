@@ -1,5 +1,4 @@
 /* CSS for screensize upto 1400px */
-
 @media screen and (max-width: 1400px) {
   #profile {
     height: 83vh;
@@ -12,7 +11,6 @@
 }
 
 /* CSS for screensize 1200px */
-
 @media screen and (max-width: 1200px) {
   #desktop-nav {
     display: none;
@@ -31,6 +29,10 @@
   .section-container {
     display: block;
   }
+  
+  #profile {
+    text-align: center; /* Center text content in profile section */
+  }
 
   .arrow {
     display: none;
@@ -45,9 +47,9 @@
     margin: 0 5%;
   }
 
-  .section__pic__container {
-    width: 75px;
-    height: 75px;
+  .section__pic-container {
+    width: 275px; /* Simpler sizing */
+    height: 275px;
     margin: 0 auto 2rem;
   }
 
@@ -67,6 +69,13 @@
     margin-bottom: 0;
   }
 
+  /* UPDATED: Consistent section padding on mobile */
+  section {
+    margin: 0;
+    padding: 2rem 1.5rem;
+    padding-top: 4vh;
+  }
+
   article {
     font-size: 1rem;
   }
@@ -81,6 +90,10 @@
   .btn-container {
     flex-wrap: wrap;
   }
+  
+  .btn-container {
+      gap: 0.5rem; /* Reduce gap on mobile */
+  }
 
   .contact-info-container {
     margin: 0;
@@ -89,6 +102,10 @@
   .contact-info-container p,
   .nav-links li a {
     font-size: 1rem;
+  }
+  
+  .contact-info-upper-container {
+      flex-direction: column;
   }
 
   .skills-sub-title {
@@ -105,10 +122,21 @@
     text-align: center;
   }
 
-  .section__pic__container {
-    width: auto;
-    height: 46vw;
-    justify-content: center;
+  /* THIS IS THE FIX: Added justify-content and align-items */
+  .section__pic-container {
+    width: 70vw; 
+    height: 70vw; 
+    margin: 0 auto 2rem;
+    display: flex;
+    justify-content: center; /* This centers the image horizontally */
+    align-items: center; /* This centers the image vertically */
+  }
+  
+  /* Ensure profile and about images scale properly within the container */
+  .section__pic-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensures image covers the container without distortion */
   }
 
   .section__text__p2 {
@@ -122,43 +150,9 @@
   .text-container {
     text-align: justify;
   }
-
-  /* Center the About section picture on mobile */
-  #about .section__pic-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto 2rem auto; /* centers horizontally with spacing below */
-    width: 100%;
-  }
-
-  #about .about-pic {
-    max-width: 80%; /* keep it responsive */
-    height: auto; /* maintain aspect ratio */
-    border-radius: 1rem;
-    object-fit: cover;
-  }
-
-  /* Profile picture responsiveness on mobile */
-  #profile .section__pic-container {
-    display: flex;
-    justify-content: center; /* center horizontally */
-    align-items: center; /* center vertically */
-    margin: 0 auto 2rem auto; /* center with spacing below */
-    width: 100%; /* full width of parent */
-    height: auto; /* remove fixed height */
-  }
-
-  #profile .section__pic-container img {
-    max-width: 80%; /* scale down image */
-    height: auto; /* maintain aspect ratio */
-    border-radius: 50%; /* optional: keeps it circular if you want */
-    object-fit: cover;
-  }
 }
 
-/* TEST */
-
+/* No major changes needed in this block due to Grid implementation */
 @media screen and (min-width: 1400px) {
   #skills {
     min-height: 100vh;
@@ -181,21 +175,10 @@
     gap: 3rem;
   }
 
-  /* Key change: distribute skill items inside the box */
   #skills .details-container {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly; /* spreads the content evenly */
-  }
-
-  /* Optional: make articles spread vertically instead of clustering */
-  #skills .article-container {
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: space-evenly; /* distribute rows vertically */
-    justify-content: space-around;
-    gap: 2rem;
+    justify-content: space-evenly;
   }
 }
