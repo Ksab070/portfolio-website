@@ -415,3 +415,58 @@ footer {
 footer p {
   text-align: center;
 }
+
+/* Enhancing about-me */
+
+.highlight {
+  font-weight: 600; 
+  color: #0056b3; 
+  background-color: rgba(0, 123, 255, 0.07); 
+  padding: 2px 6px;
+  border-radius: 5px;
+  white-space: nowrap; /* Prevents the highlight from breaking mid-word */
+}
+
+/* In style.css */
+.cert-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* Space between icon and text */
+  margin-bottom: 0.5rem; /* Space between list items */
+  font-size: 1rem; /* Adjust font size if needed */
+}
+
+.cert-icon {
+  height: 1.5rem; /* Control the size of the icon */
+  width: 1.5rem;
+}
+
+/* Add hover effect to project cards and skill boxes */
+.details-container, .color-container {
+    transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.details-container:hover, .color-container:hover {
+    transform: translateY(-5px); /* Lifts the card up slightly */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Adds a soft shadow */
+}
+
+/* Cert list decoration */
+
+/* In style.css, you can add this near your other .cert-list styles */
+
+/* Remove default link styling */
+.cert-list li a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: inherit; /* Use the parent text color */
+  text-decoration: none; /* Remove the underline */
+  transition: color 300ms ease;
+}
+
+/* Add a hover effect for visual feedback */
+.cert-list li a:hover {
+  color: #0056b3; /* Change color on hover */
+  text-decoration: underline; /* Add underline on hover */
+}
