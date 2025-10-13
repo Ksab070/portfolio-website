@@ -1,0 +1,30 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": "logs:CreateLogGroup",
+			"Resource": "arn:aws:logs:us-east-1:820772009901:*"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"logs:CreateLogStream",
+				"logs:PutLogEvents"
+			],
+			"Resource": [
+				"arn:aws:logs:us-east-1:820772009901:log-group:/aws/lambda/cloud-resume-test:*"
+			]
+		},
+		{
+			"Effect": "Allow",
+			"Resource": [
+				"arn:aws:dynamodb:us-east-1:820772009901:table/visitorCounter"
+			],
+			"Action": [
+				"dynamodb:UpdateItem",
+				"dynamodb:GetItem"
+			]
+		}
+	]
+}

@@ -402,6 +402,10 @@ article div {
   font-size: larger;
 }
 
+.contact-icon {
+  cursor: default;
+}
+
 .email-icon {
   height: 2.5rem;
 }
@@ -414,6 +418,7 @@ footer {
 
 footer p {
   text-align: center;
+  font-size: larger;
 }
 
 /* Enhancing about-me */
