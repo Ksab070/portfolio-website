@@ -4,7 +4,7 @@
 		{
 			"Effect": "Allow",
 			"Action": "logs:CreateLogGroup",
-			"Resource": "arn:aws:logs:us-east-1:820772009901:*"
+			"Resource": "log-group-arn"
 		},
 		{
 			"Effect": "Allow",
@@ -13,13 +13,13 @@
 				"logs:PutLogEvents"
 			],
 			"Resource": [
-				"arn:aws:logs:us-east-1:820772009901:log-group:/aws/lambda/cloud-resume-test:*"
+				"log-group-arn"
 			]
 		},
 		{
 			"Effect": "Allow",
 			"Resource": [
-				"arn:aws:dynamodb:us-east-1:820772009901:table/visitorCounter"
+				"table-arn"
 			],
 			"Action": [
 				"dynamodb:UpdateItem",

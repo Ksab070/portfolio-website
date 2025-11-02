@@ -2,7 +2,7 @@ Architecture
 
 | Component                       | Purpose                                                 |
 | ------------------------------- | ------------------------------------------------------- |
-| **S3 (Static Website Hosting)** | Serves the static HTML/CSS/JS site                      |
+| **S3 Bucket**                   | Serves the static HTML/CSS/JS site                      |
 | **CloudFront**                  | CDN + HTTPS support                                     |
 | **Route 53**                    | DNS + subdomain delegation                              |
 | **API Gateway (HTTP API)**      | Endpoint for the backend (visitor counter, form, etc.)  |

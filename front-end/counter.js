@@ -1,6 +1,6 @@
 async function incrementAndShowCount() {
   // Will change the url in prod 
-  const apiUrl = "https://vhejrsn9y2.execute-api.us-east-1.amazonaws.com/api";
+  const apiUrl = "https://app.cloud-personal.com/api";
 
   try {
     const resp = await fetch(apiUrl, {

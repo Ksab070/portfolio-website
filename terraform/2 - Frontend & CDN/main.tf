@@ -32,7 +32,7 @@ resource "aws_s3_object" "upload_frontend" {
     regex("[^.]+$", each.value),
     "application/octet-stream"
   )
-
+  tags = merge(local.aws_tags, local.environment)
 }
 
 
@@ -128,6 +128,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     # Here it resolves to my-app-bucket-${random_id.suffix.hex}.s3.us-east-1.amazonaws.com (or any regional specific domain name)
     domain_name = aws_s3_bucket.bucket.bucket_regional_domain_name
   }
+  tags = merge(local.aws_tags, local.environment)
 
 }
 
