@@ -67,6 +67,10 @@ data "aws_iam_policy_document" "origin_bucket_policy" {
   }
 }
 
+data "aws_cloudfront_cache_policy" "caching_disabled" {
+  name = "Managed-CachingDisabled"
+}
+
 # Modify the s3 bucket policy for the cloudfront distribution
 resource "aws_s3_bucket_policy" "bucket_policy" {
   bucket = aws_s3_bucket.bucket.bucket
@@ -92,7 +96,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   # Add an alias to this  
-  aliases = ["${local.app-domain}"]
+  aliases = [local.app-domain]
 
   # Virtually adding no restrictions
   restrictions {
@@ -102,8 +106,18 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     }
   }
 
+  ordered_cache_behavior {
+    path_pattern           = "/api"
+    target_origin_id       = local.apigateway_origin_id
+    viewer_protocol_policy = "redirect-to-https"
+    allowed_methods        = ["GET", "HEAD"]
+    cached_methods         = ["GET", "HEAD"]
+
+    cache_policy_id = data.aws_cloudfront_cache_policy.caching_disabled.id
+  }
+
   default_cache_behavior {
-    allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = local.s3_origin_id
 
@@ -121,14 +135,30 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     max_ttl                = 86400
   }
 
+  # Front-end origin (s3 bucket)
   origin {
     origin_access_control_id = aws_cloudfront_origin_access_control.default.id
     origin_id                = local.s3_origin_id
-
-    # Here it resolves to my-app-bucket-${random_id.suffix.hex}.s3.us-east-1.amazonaws.com (or any regional specific domain name)
-    domain_name = aws_s3_bucket.bucket.bucket_regional_domain_name
+    domain_name              = aws_s3_bucket.bucket.bucket_regional_domain_name
   }
+
+  # API - gateway origin 
+  origin {
+    domain_name = replace(aws_apigatewayv2_api.views-api.api_endpoint, "https://", "")
+    origin_id   = local.apigateway_origin_id
+
+    custom_origin_config {
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "https-only"
+      origin_ssl_protocols   = ["TLSv1.2"]
+    }
+
+  }
+
   tags = merge(local.aws_tags, local.environment)
+
+  depends_on = [aws_s3_bucket.bucket, aws_apigatewayv2_api.views-api]
 
 }
 
@@ -142,3 +172,5 @@ resource "aws_route53_record" "cname-cf-distro-from-appdomain" {
     evaluate_target_health = false
   }
 }
+
+

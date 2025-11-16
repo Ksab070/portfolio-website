@@ -11,6 +11,7 @@ provider "aws" {
   region = "us-east-1"
 }
 
+
 locals {
   aws_tags = {
     "Terraform" : "Yes"
@@ -25,6 +26,7 @@ locals {
   frontend_path  = "${path.module}/../../front-end"
   s3_bucket_name = "my-app-bucket-sk"
   s3_origin_id   = "my-s3-origin"
+  apigateway_origin_id = "apigateway-origin"
   domain         = "cloud-personal.com"
   app-domain     = "app.${local.domain}"
 }

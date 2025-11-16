@@ -1,3 +1,13 @@
+terraform {
+  backend "s3" {
+    # Explicitly adding values here, since variables are not allowed in terraform backend configuration block
+    bucket       = "prod-tfstate-crc"
+    key          = "prod/DNS-tfstate"
+    use_lockfile = true
+    region       = "us-east-1"
+  }
+}
+
 # Create the R53 domain 
 resource "aws_route53_zone" "app" {
   name = local.app-domain
