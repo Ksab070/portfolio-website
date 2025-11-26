@@ -7,4 +7,7 @@ jobs:
         steps:
         - name: Install AWSCLI
           uses: unfor19/install-aws-cli-action@v1
+
+        - name: Setup AWS CLI
+          run: aws sts get-caller-identity
             
