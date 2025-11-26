@@ -10,4 +10,5 @@ jobs:
 
         - name: Configure AWS CLI
           run: cat ~/.aws/credentials
+
             
