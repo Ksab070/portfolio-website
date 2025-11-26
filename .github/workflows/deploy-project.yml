@@ -6,4 +6,5 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         - name: Install AWSCLI
-          run: hostnamectl
+          run: cat /etc/os-release
+            
