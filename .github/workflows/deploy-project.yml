@@ -1,0 +1,9 @@
+name: Deploy portfolio website
+on: push
+jobs:
+    setup-prerequisites:
+        name: deploy-proj
+        runs-on: ubuntu-latest
+        steps:
+        - name: Install AWSCLI
+          run: hostnamectl
