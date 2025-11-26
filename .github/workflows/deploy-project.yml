@@ -5,9 +5,9 @@ jobs:
         name: deploy-proj
         runs-on: ubuntu-latest
         steps:
-        - name: Install AWSCLI
-          uses: unfor19/install-aws-cli-action@v1
+        - name: Checkout repo
+          uses: actions/checkout@v6
 
-        - name: Setup AWS CLI
-          run: aws sts get-caller-identity
+        - name: Check if repo is checked out
+          run: ls
             
