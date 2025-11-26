@@ -6,5 +6,5 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         - name: Install AWSCLI
-          run: cat /etc/os-release && hostnamectl
+          uses: unfor19/install-aws-cli-action@v1
             
