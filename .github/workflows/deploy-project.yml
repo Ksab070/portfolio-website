@@ -20,6 +20,9 @@ jobs:
         
         - name: Export Cloudflare token
           run: export CLOUDFLARE_API_TOKEN=${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+        - name: Create S3 bucket for statefile
+          run: bash "terraform/create-bucket.sh"
     
         - name: Create DNS layer
           run: | 
