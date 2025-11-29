@@ -1,7 +1,7 @@
 name: Deploy portfolio website
 on: push
 jobs:
-    setup-prerequisites:
+    deploy-proj:
         name: deploy-proj
         runs-on: ubuntu-latest
         steps:
@@ -13,7 +13,24 @@ jobs:
           with:
             aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws-region: ${{ secrets.AWS_REGION }}   # optional
+            aws-region: ${{ secrets.AWS_REGION }} 
+        
+        - name: Install terraform
+          uses: hashicorp/setup-terraform@v3.1.2
+        
+        - name: Export Cloudflare token
+          run: export CLOUDFLARE_API_TOKEN=${{ secrets.CLOUDFLARE_API_TOKEN }}
+    
+        - name: Create DNS layer
+          run: | 
+            cd "terraform/1 - DNS"
+            terraform init && terraform apply -target=aws_route53_zone.app -auto-approve
+            terraform apply -auto-approve
+        
+        - name: Create CORE Infra
+          run: |
+            cd "../2 - Core"
+            terraform init && terraform apply -auto-approve
 
-        - name: Check AWS CLI configuration
-          run: aws sts get-caller-identity
+
+      
