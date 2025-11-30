@@ -24,6 +24,7 @@ resource "cloudflare_dns_record" "ns-records-r53" {
   for_each = toset(local.ns_records)
   content  = each.value
   proxied  = false
+  depends_on = [ aws_route53_zone.app ]
 }
 
 # Request the ACM certificate
@@ -31,6 +32,7 @@ resource "aws_acm_certificate" "cert-for-app" {
   domain_name       = local.app-domain
   validation_method = "DNS"
   tags              = merge(local.aws_tags, local.environment)
+  depends_on = [ cloudflare_dns_record.ns-records-r53 ]
 }
 
 # Create a r53 record for certificate validation
