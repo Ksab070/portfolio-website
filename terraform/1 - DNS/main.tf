@@ -42,11 +42,13 @@ resource "aws_route53_record" "record-for-acm-validation" {
   name    = tolist(aws_acm_certificate.cert-for-app.domain_validation_options)[0].resource_record_name
   records = [tolist(aws_acm_certificate.cert-for-app.domain_validation_options)[0].resource_record_value]
   ttl     = 1
+  depends_on = [ aws_acm_certificate.cert-for-app ]
 }
 
 # Manually trigger the validation for the aws certificate
 resource "aws_acm_certificate_validation" "validation-for-cert" {
   certificate_arn = aws_acm_certificate.cert-for-app.arn
+  depends_on = [ aws_route53_record.record-for-acm-validation ]
 }
 
 
