@@ -19,7 +19,9 @@ jobs:
           uses: hashicorp/setup-terraform@v3.1.2
         
         - name: Export Cloudflare token
-          run: export CLOUDFLARE_API_TOKEN="${{ secrets.CLOUDFLARE_API_TOKEN }}"
+          run: |
+            export CLOUDFLARE_API_TOKEN="${{ secrets.CLOUDFLARE_API_TOKEN }}"
+            echo $CLOUDFLARE_API_TOKEN 
 
         - name: Create S3 bucket for statefile
           run: bash "terraform/create-bucket.sh"
