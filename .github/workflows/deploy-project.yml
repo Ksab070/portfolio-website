@@ -31,7 +31,7 @@ jobs:
         
         - name: Create CORE Infra
           run: |
-            cd "../2 - Core"
+            cd "terraform/2 - Core"
             terraform init && terraform apply -auto-approve
 
 
