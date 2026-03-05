@@ -10,9 +10,9 @@ Architecture
 | **DynamoDB Table**              | Stores your visitor count                               |
 
 
-# Cloud Resume Challenge – AWS | Terraform | CloudFront | Lambda | API Gateway | Cloudflare
+# Cloud Resume - AWS | Terraform | CloudFront | Lambda | API Gateway | Cloudflare
 
-This repository contains my implementation of the **Cloud Resume Challenge**, built using a fully-serverless architecture on AWS and automated with **Terraform**. The frontend is hosted on S3 behind CloudFront, the backend uses Lambda + API Gateway for the visitor counter, and DNS is handled via Route53 and Cloudflare. All infrastructure is provisioned through Terraform with a remote S3 backend.
+This repository contains my implementation of the **Cloud Resume**, built using a fully-serverless architecture on AWS and automated with **Terraform**. The frontend is hosted on S3 behind CloudFront, the backend uses Lambda + API Gateway for the visitor counter, and DNS is handled via Route53 and Cloudflare. All infrastructure is provisioned through Terraform with a remote S3 backend.
 
 ## 📌 Architecture Overview
 
@@ -84,3 +84,4 @@ bash ../create-bucket.sh
 terraform init
 terraform apply -auto-approve
 ```
+
